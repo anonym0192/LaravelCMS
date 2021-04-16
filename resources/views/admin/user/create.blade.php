@@ -1,0 +1,49 @@
+@extends('adminlte::page')
+
+
+@section('title', 'Criar Usuário')
+    
+
+@section('content_header')
+    <h1>Criar novo Usuário</h1>
+@endsection
+
+@section('content')
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <h4>Ocorreu um erro.</h4>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <div class="card">
+        <form method="post" action="{{route('users.store')}}" style="max-width: 700px" >
+            @csrf
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label " for="name">Nome Completo</label>
+                    <input type="text" class="form-control col-8 @error('name') is-invalid @enderror" id="name" name="name" required value="{{old('name')}}">
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label " for="email">E-mail</label>
+                    <input type="email" class="form-control col-8 @error('email') is-invalid @enderror " id="email" name="email" required value="{{old('email')}}">
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label " for="password">Senha</label>
+                    <input type="password" class="form-control col-8 @error('password') is-invalid @enderror" id="password" name="password" required >
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label " for="password_confirmation">Confirmar Senha</label>
+                    <input type="password" class="form-control col-8" id="password_confirmation" name="password_confirmation" required >
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+            </div>      
+        </form>
+    </div>
+@endsection
